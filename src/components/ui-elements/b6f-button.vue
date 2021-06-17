@@ -1,15 +1,18 @@
 <template>
-  <button :class="classType">
+  <component :is="tag" class="btn" :class="classType">
     <slot></slot>
-  </button>
+  </component>
 </template>
-
 <script>
 import { computed } from "vue";
 
 export default {
   props: {
     size: String,
+    tag: {
+      type: [String, Object],
+      default: () => ({}),
+    },
   },
   setup(props) {
     const classes = ["sm", "md", "lg"];
@@ -23,7 +26,7 @@ export default {
 </script>
 
 <style scoped>
-button {
+.btn {
   padding: 10px 20px;
   background-color: #5bc0de;
   border: none;
@@ -31,6 +34,8 @@ button {
   color: #fff;
   border-radius: 3px;
   cursor: pointer;
+  display: inline-block;
+  text-align: center;
 }
 .lg {
   width: 150px;

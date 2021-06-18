@@ -26,15 +26,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 50vh;
-}
-.card .btn {
-  margin: 10px 0;
-}
-</style>
+<style scoped></style>

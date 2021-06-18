@@ -34,7 +34,7 @@ export default {
             },
             ...this.$attrs,
           },
-          ""
+          this.element === "select" ? this.$slots.default() : ""
         ),
       ]
     );
@@ -71,12 +71,18 @@ label {
   display: block;
   width: 30%;
 }
-input {
+input,
+select,
+textarea {
   display: block;
   width: 70%;
   padding: 5px 10px;
   border-radius: 3px;
   border: 1px solid #aaa;
   outline-color: #949494;
+}
+
+textarea {
+  height: 100px;
 }
 </style>

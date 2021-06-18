@@ -11,7 +11,7 @@
           tag="router-link"
           size="md"
         >
-          Add
+          <b6f-icon svg="add"></b6f-icon>
         </b6f-button>
       </div>
     </div>
@@ -21,17 +21,18 @@
         <td>horaire</td>
         <td>type consultation</td>
         <td>
-          <b6f-button tag="a" href="#" class="table-link" size="sm"
-            >edit</b6f-button
-          >
+          <b6f-button tag="a" href="#" class="table-link" size="sm">
+            <b6f-icon svg="edit"></b6f-icon>
+          </b6f-button>
           <b6f-button
             tag="a"
             class="table-link"
             size="sm"
             :style="{ 'background-color': '#d9544f' }"
             href="#"
-            >delete</b6f-button
           >
+            <b6f-icon svg="delete"></b6f-icon>
+          </b6f-button>
         </td>
       </tr>
     </b6f-table>
@@ -42,6 +43,7 @@
 import B6fCard from "../components/ui-elements/b6f-card.vue";
 import B6fButton from "../components/ui-elements/b6f-button.vue";
 import B6fTable from "../components/ui-elements/b6f-table.vue";
+import B6fIcon from "../components/ui-elements/b6f-icon.vue";
 
 export default {
   name: "RendezVous",
@@ -49,6 +51,7 @@ export default {
     B6fTable,
     B6fCard,
     B6fButton,
+    B6fIcon,
   },
 };
 </script>

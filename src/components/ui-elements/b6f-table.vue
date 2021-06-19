@@ -1,14 +1,16 @@
 <template>
-  <table>
-    <thead>
-      <tr>
-        <th v-for="h in head" :key="h">{{ h }}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <slot></slot>
-    </tbody>
-  </table>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th v-for="h in head" :key="h">{{ h }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <slot></slot>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
@@ -21,6 +23,9 @@ export default {
 </script>
 
 <style scoped>
+.table-container {
+  overflow: auto;
+}
 table {
   width: 600px;
   text-align: left;

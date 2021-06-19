@@ -1,5 +1,20 @@
+<template>
+  <div class="form-group" :class="vertical ? 'vertical' : ''">
+    <label :for="`id-${text}`">{{ text }}</label>
+    <component
+      :id="`id-${text}`"
+      :is="element"
+      v-bind="$attrs"
+      :value="modelValue"
+      @input="$emit('onUpdate:modelValue', $event.target.value)"
+    >
+      <slot></slot>
+    </component>
+  </div>
+</template>
+
 <script>
-import { computed, h } from "vue";
+import { computed } from "vue";
 
 export default {
   props: {
@@ -11,41 +26,21 @@ export default {
       type: String,
       default: "",
     },
-    value: {
-      type: String,
+    modelValue: {
+      type: [String, Date],
       default: "",
     },
     vertical: Boolean,
   },
-  emits: ["input"],
-  render() {
-    return h(
-      "div",
-      { class: `form-group ${this.vertical ? "vertical" : ""}` },
-      [
-        h("label", {}, this.text),
-        h(
-          this.element,
-          {
-            placeholder: this.text,
-            onInput: (event) => {
-              this.inputVal = event.target.value;
-              this.$emit("input", event.target.value);
-            },
-            ...this.$attrs,
-          },
-          this.element === "select" ? this.$slots.default() : ""
-        ),
-      ]
-    );
-  },
+  emits: ["update:modelValue"],
   setup(props, { emit }) {
     const inputVal = computed({
       get() {
-        return props.value;
+        return props.modelValue;
       },
       set(val) {
-        emit("input", val);
+        console.log(val);
+        emit("update:modelValue", val);
       },
     });
 

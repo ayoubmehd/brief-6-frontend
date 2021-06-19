@@ -1,14 +1,21 @@
 <template>
   <div class="container home">
     <b6f-card>
-      <form action="POST">
+      <form action="POST" @submit.prevent="add">
         <b6f-form-element
           text="Date"
           :vertical="true"
           element="input"
           type="date"
+          v-model="formData.date"
         ></b6f-form-element>
-        <b6f-form-element text="Horaire" :vertical="true" element="select">
+        <b6f-form-element
+          text="Horaire"
+          :vertical="true"
+          :modelValue="formData.horaire"
+          @update:modelValue="formData.horaire = $event"
+          element="select"
+        >
           <option value="-1" disabled selected>Horaire</option>
           <option v-for="h in horaire" :key="h" :value="h">{{ h }}</option>
         </b6f-form-element>
@@ -16,11 +23,7 @@
           text="text"
           :vertical="true"
           element="textarea"
-        ></b6f-form-element>
-        <b6f-form-element
-          text="Age"
-          :vertical="true"
-          element="input"
+          v-model="formData.text"
         ></b6f-form-element>
         <b6f-button size="md" type="submit" tag="button">Save</b6f-button>
       </form>
@@ -33,6 +36,7 @@ import B6fButton from "../components/ui-elements/b6f-button.vue";
 import B6fCard from "../components/ui-elements/b6f-card.vue";
 import B6fFormElement from "../components/ui-elements/b6f-form-element.vue";
 import { reactive } from "vue";
+import { addRendezVous } from "../api/index.js";
 
 export default {
   name: "AddRendezVous",
@@ -54,8 +58,18 @@ export default {
       "17:00",
       "18:00",
     ]);
+    const formData = reactive({
+      date: new Date(),
+      horaire: -1,
+      text: "fdsfafds",
+    });
 
-    return { horaire };
+    const add = async () => {
+      const response = await addRendezVous(formData);
+      console.log(response);
+    };
+
+    return { horaire, formData, add };
   },
 };
 </script>

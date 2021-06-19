@@ -6,7 +6,7 @@
       :is="element"
       v-bind="$attrs"
       :value="modelValue"
-      @input="$emit('onUpdate:modelValue', $event.target.value)"
+      @input="$emit('update:modelValue', $event.target.value)"
     >
       <slot></slot>
     </component>

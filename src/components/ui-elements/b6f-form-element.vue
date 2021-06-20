@@ -1,6 +1,6 @@
 <template>
   <div class="form-group" :class="vertical ? 'vertical' : ''">
-    <label :for="`id-${text}`">{{ text }}</label>
+    <label v-if="showLabel" :for="`id-${text}`">{{ text }}</label>
     <component
       :id="`id-${text}`"
       :is="element"
@@ -29,6 +29,10 @@ export default {
     modelValue: {
       type: [String, Date],
       default: "",
+    },
+    showLabel: {
+      type: Boolean,
+      default: true,
     },
     vertical: Boolean,
   },

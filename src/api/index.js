@@ -24,7 +24,14 @@ export async function addRendezVous(data) {
     return await res.json();
 }
 export async function editRendezVous(data, id) {
-    console.log({ data, id });
+    const res = await fetch(`${base_url}rendezvous/update/${id}`, {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify(data)
+    });
+    return await res.json();
 }
 export async function deleteRendezVous(id) {
     const res = await fetch(`${base_url}rendezvous/delete/${id}`, {

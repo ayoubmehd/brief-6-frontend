@@ -58,7 +58,7 @@
             size="sm"
             @click.prevent="edit"
           >
-            save
+            <b6f-icon svg="save"></b6f-icon>
           </b6f-button>
           <b6f-button
             tag="a"

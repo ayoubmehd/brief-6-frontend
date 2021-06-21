@@ -1,8 +1,8 @@
 <template>
   <div class="container home">
     <b6f-card>
-      <b6f-button to="/new-user" tag="router-link">new user</b6f-button>
-      <b6f-button to="/render-vous" tag="router-link">rendez-vous</b6f-button>
+      <b6f-button to="/register" tag="router-link">new user</b6f-button>
+      <b6f-button to="/rendez-vous" tag="router-link">rendez-vous</b6f-button>
     </b6f-card>
   </div>
 </template>

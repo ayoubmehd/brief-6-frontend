@@ -1,9 +1,7 @@
 <template>
   <b6f-card>
     <div class="rendez-vous-header">
-      <div class="ref">
-        Reference:
-      </div>
+      <div class="ref">Reference: {{ userRef }}</div>
       <div class="btn-container">
         <b6f-button
           :style="{ 'background-color': '#59b65d' }"
@@ -58,7 +56,7 @@
             size="sm"
             @click.prevent="edit"
           >
-            save
+            <b6f-icon svg="save"></b6f-icon>
           </b6f-button>
           <b6f-button
             tag="a"
@@ -87,7 +85,7 @@ import {
   deleteRendezVous,
   editRendezVous,
 } from "../api/index.js";
-import { onMounted, reactive, ref } from "@vue/runtime-core";
+import { computed, onMounted, reactive, ref } from "@vue/runtime-core";
 import { horaire } from "../globals/index.js";
 
 export default {
@@ -110,6 +108,12 @@ export default {
         text: "fdsfafds",
       },
     });
+
+    // get user ref
+    const userRef = computed(() =>
+      localStorage.getItem("user") ? localStorage.getItem("user") : ""
+    );
+
     // Get Rendez vous when page loaded
     const getAllRendezVous = async () =>
       (rendezVousData.value = await getRendezVous());
@@ -148,6 +152,7 @@ export default {
       deleteRendezVousClick,
       editing,
       Horaire,
+      userRef,
     };
   },
 };

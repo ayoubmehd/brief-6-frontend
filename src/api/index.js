@@ -64,9 +64,8 @@ export async function deleteRendezVous(id) {
 
 // User
 export async function identifyUser({ ref }) {
-    const res = await fetch(`${base_url}user/identify${ref}`, {
+    const res = await fetch(`${base_url}user/identify/${ref}`, {
         method: "POST",
-        // ...globals
         headers: {
             'Content-Type': 'application/json'
         }
@@ -74,6 +73,8 @@ export async function identifyUser({ ref }) {
     const data = await res.json();
 
     localStorage.setItem("user", data.reference);
+
+    return data;
 }
 export async function addUser(data) {
     console.log(data);

@@ -6,6 +6,8 @@ const globals = {
     }
 }
 
+const ref = localStorage.getItem("user");
+
 // Rendez Vous
 export async function test() {
     const res = await fetch(`${base_url}rendezvous/update/`, {
@@ -23,7 +25,7 @@ export async function test() {
     return await res.json();
 }
 export async function getRendezVous() {
-    const res = await fetch(`${base_url}rendezvous`);
+    const res = await fetch(`${base_url}rendezvous/index/${ref}`);
     return await res.json();
 }
 export async function addRendezVous(data) {
@@ -32,7 +34,7 @@ export async function addRendezVous(data) {
         ...globals,
         body: JSON.stringify({
             ...data,
-            ref_user: "0aO2W-2nEQ4-3zDYU-1qWYPa"
+            ref_user: ref
         })
     });
     console.log(res);
@@ -46,7 +48,7 @@ export async function editRendezVous(data, id) {
         },
         body: JSON.stringify({
             ...data,
-            ref_user: "0aO2W-2nEQ4-3zDYU-1qWYPa"
+            ref_user: ref
         })
     });
     return await res.json();

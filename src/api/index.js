@@ -28,6 +28,17 @@ export async function getRendezVous() {
     const res = await fetch(`${base_url}rendezvous/index/${ref}`);
     return await res.json();
 }
+export async function loadHours(date) {
+    const res = await fetch(`${base_url}rendezvous/get_aviable_hrours`, {
+        method: "POST",
+        ...globals,
+        body: JSON.stringify({
+            date
+        })
+    });
+    return await res.json();
+}
+
 export async function addRendezVous(data) {
     const res = await fetch(`${base_url}rendezvous/create`, {
         method: "POST",
@@ -37,7 +48,6 @@ export async function addRendezVous(data) {
             ref_user: ref
         })
     });
-    console.log(res);
     return await res.json();
 }
 export async function editRendezVous(data, id) {

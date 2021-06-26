@@ -10,7 +10,8 @@ const routes = [
   {
     path: '/components',
     name: 'Components',
-    component: () => import("../views/Components.vue")
+    component: () => import("../views/Components.vue"),
+    meta: { auth: true }
   },
   {
     path: '/login',
@@ -25,12 +26,14 @@ const routes = [
   {
     path: '/rendez-vous',
     name: 'RendezVous',
-    component: () => import("../views/RendezVous.vue")
+    component: () => import("../views/RendezVous.vue"),
+    meta: { auth: true }
   },
   {
     path: '/add-rendez-vous',
     name: 'AddRendezVous',
-    component: () => import("../views/AddRendezVous.vue")
+    component: () => import("../views/AddRendezVous.vue"),
+    meta: { auth: true }
   },
   {
     path: '/test',
@@ -50,6 +53,12 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to) => {
+  if (to.meta.auth) {
+    return !localStorage.getItem("user") ? "/login" : true;
+  }
 })
 
 export default router

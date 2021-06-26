@@ -35,8 +35,8 @@
 import B6fButton from "../components/ui-elements/b6f-button.vue";
 import B6fCard from "../components/ui-elements/b6f-card.vue";
 import B6fFormElement from "../components/ui-elements/b6f-form-element.vue";
-import { reactive } from "vue";
-import { addRendezVous } from "../api/index.js";
+import { reactive, ref, watch } from "vue";
+import { addRendezVous, loadHours } from "../api/index.js";
 
 export default {
   name: "AddRendezVous",
@@ -46,28 +46,29 @@ export default {
     B6fFormElement,
   },
   setup() {
-    const horaire = reactive([
-      "8:00",
-      "9:00",
-      "10:00",
-      "11:00",
-      "12:00",
-      "13:00",
-      "14:00",
-      "15:00",
-      "17:00",
-      "18:00",
-    ]);
+    const horaire = ref([]);
     const formData = reactive({
       date: new Date(),
       horaire: -1,
-      text: "fdsfafds",
+      text: "",
     });
 
     const add = async () => {
       const response = await addRendezVous(formData);
       console.log(response);
     };
+
+    const loadAviableHours = async () => {
+      horaire.value = await loadHours(formData.date);
+    };
+
+    // watch date
+    watch(
+      () => formData.date,
+      () => {
+        loadAviableHours();
+      }
+    );
 
     return { horaire, formData, add };
   },
